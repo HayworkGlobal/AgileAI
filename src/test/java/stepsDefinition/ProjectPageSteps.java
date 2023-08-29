@@ -1,11 +1,24 @@
 package stepsDefinition;
 
+import appHooks.Hooks;
+import common.PageGenerator;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import pageObjects.ProjectPageObject;
 
 public class ProjectPageSteps {
+    WebDriver driver;
+    ProjectPageObject projectPage;
+
+    public ProjectPageSteps() {
+        this.driver = Hooks.openAndQuitBrowser();
+        projectPage = PageGenerator.getProjectPage(driver);
+    }
+
     @Given("Click Add project button")
     public void clickAddProjectButton() {
     }
@@ -34,7 +47,12 @@ public class ProjectPageSteps {
     public void verifySuccessMessageIsDisplay() {
     }
 
-    @And("New project is added successly")
-    public void newProjectIsAddedSuccessly() {
+    @And("New project is added successfully")
+    public void newProjectIsAddedSuccessfully() {
+    }
+
+    @Then("Login success and Project page is displayed")
+    public void loginSuccessAndProjectPageIsDisplayed() {
+        Assert.assertTrue(projectPage.isProjectPageDisplayed());
     }
 }

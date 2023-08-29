@@ -18,4 +18,13 @@ public class PropertiesUtil {
         }
         return properties;
     }
+
+
+    public static String getEmail() {
+        return loadApplicationProperties().getProperty("email");
+    }
+
+    public static String getPassword() {
+        return loadApplicationProperties().getProperty("password");
+    }
 }

@@ -11,15 +11,16 @@ import common.BaseTest;
 import common.PageGenerator;
 import org.openqa.selenium.WebDriver;
 import utils.ExcelReader;
+import utils.PropertiesUtil;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 public class LoginPageSteps extends BaseTest {
 
     WebDriver driver;
-    LoginPageObject homePage;
     String projectPath = System.getProperty("user.dir");
     LoginPageObject loginPage;
 
@@ -47,5 +48,10 @@ public class LoginPageSteps extends BaseTest {
     public void verifyValidationMessage() {
         Assert.assertEquals(loginPage.getErrMsg(), "Missing required parameter USERNAME");
         ;
+    }
+
+    @Given("Input valid data into Email and Password")
+    public void input_valid_data_into_email_and_password() {
+        loginPage.fillLoginForm(PropertiesUtil.getEmail(), PropertiesUtil.getPassword());
     }
 }

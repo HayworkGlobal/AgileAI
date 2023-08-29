@@ -12,4 +12,8 @@ Feature: Login
       | Login     | 2         |
       | Login     | 3         |
       | Login     | 4         |
-      | Login     | 5         |
+
+  Scenario: User is login success with valid data
+      Given Input valid data into Email and Password
+      When Click Login button
+      Then Login success and Project page is displayed
