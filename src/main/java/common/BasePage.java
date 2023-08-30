@@ -72,6 +72,14 @@ public class BasePage {
         }
     }
 
+    public boolean isElementEnabled(WebDriver driver, String element) {
+        try {
+            return getWebElement(driver, element).isEnabled();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
     public void waitForElementClickable(WebDriver driver, String element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(element)));

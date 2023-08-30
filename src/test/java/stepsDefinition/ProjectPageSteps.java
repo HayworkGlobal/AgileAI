@@ -6,12 +6,19 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pageObjects.ProjectPageObject;
+import utils.ExcelReader;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class ProjectPageSteps {
     WebDriver driver;
+    String projectPath = System.getProperty("user.dir");
     ProjectPageObject projectPage;
 
     public ProjectPageSteps() {
@@ -21,22 +28,23 @@ public class ProjectPageSteps {
 
     @Given("Click Add project button")
     public void clickAddProjectButton() {
+        projectPage.clickAddProjectBtn();
     }
 
     @And("Verify Add project button is disabled")
     public void verifyAddProjectButtonIsDisabled() {
+        Assert.assertFalse(projectPage.isAddProjectBtnEnabled());
     }
 
-    @When("Enter valid data into Project Name")
-    public void enterValidDataIntoProjectName() {
-    }
-
-    @And("Enter valid data into Project Description")
-    public void enterValidDataIntoProjectDescription() {
-    }
-
-    @And("Enter valid data into Project Purpose")
-    public void enterValidDataIntoProjectPurpose() {
+    @When("Enter valid data from from {string} and rowNumber {int} to fields")
+    public void enterValidDataFromFromAndRowNumberToFields(String sheetName, Integer rowNumber) throws IOException, InvalidFormatException {
+        ExcelReader reader = new ExcelReader();
+        List<Map<String, String>> testData =
+                reader.getData(projectPath + "/src/test/resources/testData/Login.xlsx", sheetName);
+        String projectName = testData.get(rowNumber).get("project name");
+        String projectDescription = testData.get(rowNumber).get("project description");
+        String projectPurpose = testData.get(rowNumber).get("project purpose");
+        projectPage.enterDataToFields(projectName, projectDescription,projectPurpose);
     }
 
     @And("Verify Add project button is enabled")
@@ -55,4 +63,6 @@ public class ProjectPageSteps {
     public void loginSuccessAndProjectPageIsDisplayed() {
         Assert.assertTrue(projectPage.isProjectPageDisplayed());
     }
+
+
 }

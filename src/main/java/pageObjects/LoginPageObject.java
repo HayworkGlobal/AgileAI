@@ -22,7 +22,6 @@ public class LoginPageObject extends BasePage {
     public void clickToLoginBtn() {
         waitForElementClickable(driver, LoginPageUI.loginBtn);
         clickToElement(driver, LoginPageUI.loginBtn);
-        sleepInSecond(3);
     }
 
     public String getErrMsg() {

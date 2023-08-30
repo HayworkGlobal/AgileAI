@@ -1,12 +1,15 @@
 Feature: Project
-  Scenario: Create new project success
-    Given User is login success
+
+  Scenario Outline: Create new project success
+#    Given User is login success
     And Click Add project button
     And Verify Add project button is disabled
-    When Enter valid data into Project Name
-    And Enter valid data into Project Description
-    And Enter valid data into Project Purpose
+    When Enter valid data from from "<SheetName>" and rowNumber <RowNumber> to fields
     And Verify Add project button is enabled
     And Click Add project button
     Then Verify success message is display
     And New project is added successfully
+
+    Examples:
+      | SheetName   | RowNumber |
+      | Add Project | 0         |
