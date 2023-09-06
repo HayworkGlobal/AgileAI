@@ -72,6 +72,14 @@ public class BasePage {
         }
     }
 
+    public boolean isElementDisplayed(WebDriver driver, String element, String... dynamicValue) {
+        try {
+            return getWebElement(driver, getDynamicXpath(element, dynamicValue)).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
     public boolean isElementEnabled(WebDriver driver, String element) {
         try {
             return getWebElement(driver, element).isEnabled();
@@ -98,6 +106,16 @@ public class BasePage {
     public void waitForElementVisible(WebDriver driver, String element, String... dynamicValue) {
         WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
         explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getDynamicXpath(element, dynamicValue))));
+    }
+
+    public void waitForElementInvisible(WebDriver driver, String element) {
+        WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(element)));
+    }
+
+    public void waitForElementInvisible(WebDriver driver, String element, String... dynamicValue) {
+        WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(getDynamicXpath(element, dynamicValue))));
     }
 
     public void highlightElement(WebDriver driver, String element) {

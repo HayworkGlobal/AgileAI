@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.Random;
+
 public class BaseTest {
     private WebDriver driver;
     private final SoftAssertions softAssertions = new SoftAssertions();
@@ -24,4 +26,8 @@ public class BaseTest {
         softAssertions.assertAll();
     }
 
+    protected int generateFakeNumber() {
+        Random rand = new Random();
+        return rand.nextInt(9999);
+    }
 }
