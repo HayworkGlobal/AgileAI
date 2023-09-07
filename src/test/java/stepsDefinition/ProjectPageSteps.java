@@ -6,6 +6,7 @@ import common.PageGenerator;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pageObjects.ProjectPageObject;
@@ -15,9 +16,9 @@ public class ProjectPageSteps extends BaseTest {
     WebDriver driver;
     ProjectPageObject projectPage;
     String projectName = "Project Name" + " " + generateFakeNumber();
-    String dupProjName = projectName;
     String projectDescription = "This is test project";
     String projectPurpose = "Project Purpose";
+    private String existProjTitle;
 
     public ProjectPageSteps() {
         this.driver = Hooks.openAndQuitBrowser();
@@ -44,8 +45,8 @@ public class ProjectPageSteps extends BaseTest {
         Assert.assertTrue(projectPage.isAddProjectBtnEnabled());
     }
 
-    @Then("Verify success message is display")
-    public void verifySuccessMessageIsDisplay() {
+    @Then("Verify a success message is displayed")
+    public void verifyASuccessMessageIsDisplayed() {
         Assert.assertEquals(projectPage.getSuccessMsg(), "Project" + " " + projectName + " " + "created successfully!");
     }
 
@@ -67,16 +68,21 @@ public class ProjectPageSteps extends BaseTest {
 
     @Then("Verify error message is display")
     public void verifyErrorMessageIsDisplay() {
-        Assert.assertEquals(projectPage.getErrorMsg(), "Project name should inlcude min 1 character and max 60 characters");
+        Assert.assertEquals(projectPage.getErrorMsg(), "Project name should include min 1 character and max 60 characters");
     }
 
     @And("Enter Project Name is duplicate")
     public void enterProjectNameIsDuplicate() {
-        projectPage.enterDataToFields(dupProjName, projectDescription, projectPurpose);
+        projectPage.enterDataToFields(existProjTitle, projectDescription, projectPurpose);
     }
 
     @Then("Verify duplicate error message is display")
     public void verifyDuplicateErrorMessageIsDisplay() {
-        Assert.assertEquals(projectPage.getErrorMsg(), "Project name" + "'" + projectName + "'" + "already exists.");
+        Assert.assertEquals("Project name" + " " + "'" + existProjTitle + "'" + " " + "already exists.", projectPage.getDuplicateProjectErrMsg());
+    }
+
+    @When("Retrieves exist project titles")
+    public void retrievesExistProjectTitles() {
+        existProjTitle = projectPage.getExistProjectTitles();
     }
 }

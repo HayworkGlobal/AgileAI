@@ -58,4 +58,9 @@ public class LoginPageSteps extends BaseTest {
     public void input_valid_data_into_email_and_password() {
         loginPage.fillLoginForm(PropertiesUtil.getEmail(), PropertiesUtil.getPassword());
     }
+
+    @Given("User is at login screen")
+    public void userIsAtLoginScreen() {
+        Assert.assertTrue(loginPage.isLoginPageDisplayed());
+    }
 }

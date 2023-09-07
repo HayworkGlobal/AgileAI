@@ -28,5 +28,10 @@ public class LoginPageObject extends BasePage {
         waitForElementVisible(driver, LoginPageUI.errMsg);
         return getElementText(driver, LoginPageUI.errMsg);
     }
+
+    public boolean isLoginPageDisplayed() {
+        waitForElementVisible(driver, LoginPageUI.signInTitle);
+        return isElementDisplayed(driver, LoginPageUI.signInTitle);
+    }
 }
 

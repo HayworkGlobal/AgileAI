@@ -2,6 +2,7 @@ package pageObjects;
 
 import common.BasePage;
 import org.openqa.selenium.WebDriver;
+import pageUIs.LoginPageUI;
 import pageUIs.ProjectPageUI;
 
 public class ProjectPageObject extends BasePage {
@@ -48,13 +49,13 @@ public class ProjectPageObject extends BasePage {
     }
 
     public String getErrorMsg() {
-        try {
-            waitForElementVisible(driver, ProjectPageUI.projNameErrMsg);
-            return getElementText(driver, ProjectPageUI.projNameErrMsg);
-        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
-            waitForElementVisible(driver, ProjectPageUI.dupProjNameMsg);
-            return getElementText(driver, ProjectPageUI.dupProjNameMsg);
-        }
+        waitForElementVisible(driver, ProjectPageUI.projNameErrMsg);
+        return getElementText(driver, ProjectPageUI.projNameErrMsg);
+    }
+
+    public String getDuplicateProjectErrMsg() {
+        waitForElementVisible(driver, ProjectPageUI.dupProjNameMsg);
+        return getElementText(driver, ProjectPageUI.dupProjNameMsg);
     }
 
     public boolean isProjectAddedSuccess(String projectName) {
@@ -62,5 +63,9 @@ public class ProjectPageObject extends BasePage {
         return isElementDisplayed(driver, ProjectPageUI.projectTitle, projectName);
     }
 
+    public String getExistProjectTitles() {
+        waitForElementVisible(driver, ProjectPageUI.existProjectTitle);
+        return getElementText(driver, ProjectPageUI.existProjectTitle);
+    }
 }
 

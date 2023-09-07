@@ -2,8 +2,9 @@ Feature: Login Page
 
   @log001
   Scenario Outline: Check validation for Email and Password fields
-    Given Input data into Email and Password from sheetName "<SheetName>" and rowNumber <RowNumber>
-    When Click Login button
+    Given User is at login screen
+    When Input data into Email and Password from sheetName "<SheetName>" and rowNumber <RowNumber>
+    And Click Login button
     Then Verify validation message from sheetName "<SheetName>" and rowNumber <RowNumber>
 
     Examples:

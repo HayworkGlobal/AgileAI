@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 
 public class BasePage {
@@ -23,16 +24,22 @@ public class BasePage {
         return driver.findElement(By.xpath(element));
     }
 
+    public List<WebElement> getListWebElement(WebDriver driver, String element) {
+        return driver.findElements(By.xpath(element));
+    }
+
     public String getDynamicXpath(String element, String... dynamicValue) {
         element = String.format(element, (Object[]) dynamicValue);
         return element;
     }
 
     public void clickToElement(WebDriver driver, String element) {
+        highlightElement(driver, element);
         getWebElement(driver, element).click();
     }
 
     public void sendKeyToElement(WebDriver driver, String element, String value) {
+        highlightElement(driver, element);
         WebElement ele = getWebElement(driver, element);
         ele.clear();
         ele.sendKeys(value);
@@ -57,6 +64,7 @@ public class BasePage {
 
 
     public String getElementText(WebDriver driver, String element) {
+        highlightElement(driver, element);
         return getWebElement(driver, element).getText().trim();
     }
 
@@ -108,6 +116,11 @@ public class BasePage {
         explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getDynamicXpath(element, dynamicValue))));
     }
 
+    public void waitForAllElementVisible(WebDriver driver, String element) {
+        WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        explicitWait.until(ExpectedConditions.visibilityOfAllElements(getListWebElement(driver, element)));
+    }
+
     public void waitForElementInvisible(WebDriver driver, String element) {
         WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
         explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(element)));
@@ -124,7 +137,7 @@ public class BasePage {
         String originalStyle = ele.getAttribute("style");
         String highlightStyle = "border: 2px solid red; border-style: dashed;";
         jsExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", ele, "style", highlightStyle);
-        sleepInSecond(1);
+        sleepInSecond(200);
         jsExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", ele, "style", originalStyle);
     }
 
@@ -134,7 +147,7 @@ public class BasePage {
         String originalStyle = ele.getAttribute("style");
         String highlightStyle = "border: 2px solid red; border-style: dashed;";
         jsExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", ele, "style", highlightStyle);
-        sleepInSecond(1);
+        sleepInSecond(200);
         jsExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", ele, "style", originalStyle);
     }
 
@@ -148,9 +161,9 @@ public class BasePage {
         jsExecutor.executeScript("arguments[0].click();", getWebElement(driver, element));
     }
 
-    public void sleepInSecond(long second) {
+    public void sleepInSecond(long millisecond) {
         try {
-            Thread.sleep(second * 1000);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             //noinspection CallToPrintStackTrace
             e.printStackTrace();

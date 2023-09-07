@@ -11,4 +11,6 @@ public class ProjectPageUI {
     public static String projectTitle = "//h5[contains(@class,'MuiTypography-h5') and text()='%s']";
     public static String projNameErrMsg = "//label[text()='Project Name']//parent::div//div[2]";
     public static String dupProjNameMsg = "//label[text()='Project Name']//preceding-sibling::p";
+    public static String existProjectTitle = "(//p[contains(@class,'projectdate')]//preceding-sibling::h5)[1]";
+
 }
