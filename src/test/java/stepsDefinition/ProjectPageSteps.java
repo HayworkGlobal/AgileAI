@@ -45,7 +45,7 @@ public class ProjectPageSteps extends BaseTest {
         Assert.assertTrue(projectPage.isAddProjectBtnEnabled());
     }
 
-    @Then("Verify a success message is displayed")
+    @Then("Verify a successful message is displayed")
     public void verifyASuccessMessageIsDisplayed() {
         Assert.assertEquals(projectPage.getSuccessMsg(), "Project" + " " + projectName + " " + "created successfully!");
     }
@@ -55,7 +55,7 @@ public class ProjectPageSteps extends BaseTest {
         Assert.assertTrue(projectPage.isProjectAddedSuccess(projectName));
     }
 
-    @Then("Login success and Project page is displayed")
+    @Then("Login is successful and Project page is displayed")
     public void loginSuccessAndProjectPageIsDisplayed() {
         Assert.assertTrue(projectPage.isProjectPageDisplayed());
     }
@@ -66,17 +66,17 @@ public class ProjectPageSteps extends BaseTest {
         projectPage.enterDataToFields(longProjectName, projectDescription, projectPurpose);
     }
 
-    @Then("Verify error message is display")
+    @Then("Verify error message is displayed")
     public void verifyErrorMessageIsDisplay() {
         Assert.assertEquals(projectPage.getErrorMsg(), "Project name should include min 1 character and max 60 characters");
     }
 
-    @And("Enter Project Name is duplicate")
+    @And("Enter Project Name is duplicated")
     public void enterProjectNameIsDuplicate() {
         projectPage.enterDataToFields(existProjTitle, projectDescription, projectPurpose);
     }
 
-    @Then("Verify duplicate error message is display")
+    @Then("Verify duplicated error message is displayed")
     public void verifyDuplicateErrorMessageIsDisplay() {
         Assert.assertEquals("Project name" + " " + "'" + existProjTitle + "'" + " " + "already exists.", projectPage.getDuplicateProjectErrMsg());
     }

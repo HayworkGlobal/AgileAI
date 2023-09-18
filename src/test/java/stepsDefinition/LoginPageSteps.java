@@ -29,8 +29,8 @@ public class LoginPageSteps extends BaseTest {
         loginPage = PageGenerator.getHomePage(driver);
     }
 
-    @Given("Input data into Email and Password from sheetName {string} and rowNumber {int}")
-    public void inputDataIntoEmailAndPasswordFromSheetNameAndRowNumber(String sheetName, Integer rowNumber) throws IOException, InvalidFormatException {
+    @Given("Input invalid data into Email and Password from sheetName {string} and rowNumber {int}")
+    public void inputInvalidDataIntoEmailAndPasswordFromSheetNameAndRowNumber(String sheetName, Integer rowNumber) throws IOException, InvalidFormatException {
         ExcelReader reader = new ExcelReader();
         List<Map<String, String>> testData =
                 reader.getData(projectPath + "/src/test/resources/testData/Login.xlsx", sheetName);
@@ -44,7 +44,7 @@ public class LoginPageSteps extends BaseTest {
         loginPage.clickToLoginBtn();
     }
 
-    @Then("Verify validation message from sheetName {string} and rowNumber {int}")
+    @Then("Verify the error message is displayed from sheetName {string} and rowNumber {int}")
     public void verifyValidationMessageFromSheetNameAndRowNumber(String sheetName, Integer rowNumber) throws IOException, InvalidFormatException {
         ExcelReader reader = new ExcelReader();
         List<Map<String, String>> testData =

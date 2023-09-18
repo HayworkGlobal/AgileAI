@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = {"stepsDefinition"
                 , "appHooks"},
-        tags = "@log002  or @proj003",
+//        tags = "@log001 or @log002 or @proj001 or @proj002 or @proj003",
         monochrome = true,
         publish = true,
         plugin = {

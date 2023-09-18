@@ -1,11 +1,11 @@
 Feature: Login Page
 
   @log001
-  Scenario Outline: Check validation for Email and Password fields
+  Scenario Outline: Verify the error message is displayed when user enters incorrect email or password
     Given User is at login screen
-    When Input data into Email and Password from sheetName "<SheetName>" and rowNumber <RowNumber>
+    When Input invalid data into Email and Password from sheetName "<SheetName>" and rowNumber <RowNumber>
     And Click Login button
-    Then Verify validation message from sheetName "<SheetName>" and rowNumber <RowNumber>
+    Then Verify the error message is displayed from sheetName "<SheetName>" and rowNumber <RowNumber>
 
     Examples:
       | SheetName | RowNumber |
@@ -16,7 +16,7 @@ Feature: Login Page
       | Login     | 4         |
 
   @log002
-  Scenario: User is login success with valid data
+  Scenario: Verify user is able to login successfully with valid data
     Given Input valid data into Email and Password
     When Click Login button
-    Then Login success and Project page is displayed
+    Then Login is successful and Project page is displayed
