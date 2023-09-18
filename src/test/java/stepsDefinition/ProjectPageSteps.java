@@ -85,4 +85,43 @@ public class ProjectPageSteps extends BaseTest {
     public void retrievesExistProjectTitles() {
         existProjTitle = projectPage.getExistProjectTitles();
     }
+
+    @Then("Verify project is edited successfully")
+    public void verifyProjectIsEditedSuccessfully() {
+
+    }
+
+    @When("Click Edit button")
+    public void clickEditButton() {
+
+    }
+
+    @And("Click Save Project button")
+    public void clickSaveProjectButton() {
+
+    }
+
+    @When("Click Delete icon")
+    public void clickDeleteIcon() {
+    }
+
+    @And("Click Confirm button in confirm popup")
+    public void clickConfirmButtonInConfirmPopup() {
+    }
+
+    @Then("Verify successful message is displayed")
+    public void verifySuccessfulMessageIsDisplayed() {
+    }
+
+    @And("Project is deleted successful")
+    public void projectIsDeletedSuccessful() {
+    }
+
+    @When("Click View button")
+    public void clickViewButton() {
+    }
+
+    @And("Click Add Requirement button")
+    public void clickAddRequirementButton() {
+    }
 }
